@@ -39,11 +39,10 @@ export default {
 			try {
 				await axios.get("/sanctum/csrf-cookie");
 				await axios.post("/login", this.form);
-
 				let response = await axios.get("/api/user");
 
+				this.$store.commit("setAuth", response.data);
 				console.log(response);
-				/* window.location = "/about"; */
 				this.$router.push("/about");
 			} catch (error) {
 				this.errors = error.response.data.errors;
@@ -53,5 +52,8 @@ export default {
 	mounted() {
 		console.log("Component mounted.");
 	},
+	/* 	beforeCreate() {
+		this.$store.commit("initializeAuth");
+	}, */
 };
 </script>

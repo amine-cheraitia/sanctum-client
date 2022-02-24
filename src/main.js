@@ -11,5 +11,8 @@ axios.defaults.baseURL = "http://localhost:8000";
 new Vue({
 	router,
 	store,
+	beforeCreate() {
+		this.$store.commit("initializeAuth");
+	},
 	render: (h) => h(App),
 }).$mount("#app");
