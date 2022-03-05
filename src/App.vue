@@ -3,7 +3,7 @@
 		<nav>
 			<router-link to="/">Home</router-link> |
 			<router-link to="/about">About</router-link> |
-			<router-link to="/logout" v-if="this.$store.state.user">{{
+			<router-link to="/amine" v-if="this.$store.state.user">{{
 				this.$store.state.user.name
 			}}</router-link>
 			|
@@ -22,15 +22,21 @@ export default {
 		};
 	},
 	created() {
-		if (this.$store.state.authenticated) {
-			this.auth = false;
-		}
+		this.checkAuth();
+	},
+	updated() {
+		this.checkAuth();
 	},
 	methods: {
 		redirectme() {
 			this.auth = true;
 			this.$store.commit("disconnecte");
 			this.$router.push("/login");
+		},
+		checkAuth() {
+			if (this.$store.state.authenticated) {
+				this.auth = false;
+			}
 		},
 	},
 };

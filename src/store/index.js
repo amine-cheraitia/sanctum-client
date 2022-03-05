@@ -8,7 +8,11 @@ export default new Vuex.Store({
 		authenticated: false,
 		user: null,
 	},
-	getters: {},
+	getters: {
+		isAuth(state) {
+			return state.authenticated;
+		},
+	},
 	mutations: {
 		setAuth(state, payload) {
 			localStorage.setItem("authAmine", JSON.stringify(payload));
@@ -24,7 +28,7 @@ export default new Vuex.Store({
 		disconnecte(state) {
 			localStorage.removeItem("authAmine");
 			state.authenticated = false;
-			state.auser = null;
+			state.user = null;
 		},
 	},
 	actions: {},

@@ -51,6 +51,10 @@ export default {
 	},
 	mounted() {
 		console.log("Component mounted.");
+		console.log("c'est " + this.$store.getters.isAuth);
+		if (this.$store.getters.isAuth) {
+			this.$router.push("/");
+		}
 	},
 	/* 	beforeCreate() {
 		this.$store.commit("initializeAuth");
