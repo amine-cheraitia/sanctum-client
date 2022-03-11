@@ -3,13 +3,16 @@
 		<nav>
 			<router-link to="/">Home</router-link> |
 			<router-link to="/about">About</router-link> |
-			<router-link to="/amine" v-if="this.$store.state.user">{{
-				this.$store.state.user.name
-			}}</router-link>
-			|
-			<router-link v-if="auth" to="/login">Login</router-link>
+			<span v-if="auth">
+				<router-link to="/products">Products</router-link> |</span
+			>
+
+			<router-link to="/amine" v-if="this.$store.state.user"
+				>{{ this.$store.state.user.name }} |</router-link
+			>
+
+			<router-link v-if="!auth" to="/login">Login</router-link>
 			<button v-else @click="redirectme">logout</button>
-			|
 		</nav>
 		<router-view />
 	</div>
@@ -18,7 +21,7 @@
 export default {
 	data() {
 		return {
-			auth: true,
+			auth: false,
 		};
 	},
 	created() {
@@ -29,13 +32,13 @@ export default {
 	},
 	methods: {
 		redirectme() {
-			this.auth = true;
+			this.auth = false;
 			this.$store.commit("disconnecte");
 			this.$router.push("/login");
 		},
 		checkAuth() {
 			if (this.$store.state.authenticated) {
-				this.auth = false;
+				return (this.auth = true);
 			}
 		},
 	},

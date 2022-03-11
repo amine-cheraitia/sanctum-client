@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
+import ProductsView from "../views/ProductsView.vue";
 import store from "../store/index";
 
 Vue.use(VueRouter);
@@ -35,7 +36,7 @@ const routes = [
 		name: "login",
 		component: LoginView,
 		beforeEnter: (to, from, next) => {
-			if (to.name === "login" && store.getters.isAuth === true) {
+			if (store.getters.isAuth === true) {
 				console.log(store.getters.isAuth);
 				router.push("/");
 			}
@@ -43,6 +44,17 @@ const routes = [
 			console.log("non");
 			next();
 		},
+	},
+	{
+		path: "/products",
+		name: "products",
+		component: ProductsView,
+		/* 		beforeEnter: (to, from, next) => {
+			if (!store.getters.isAuth === true) {
+				router.push("/");
+			}
+			next();
+		}, */
 	},
 ];
 
