@@ -18,6 +18,8 @@
 	</div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
 	data() {
 		return {
@@ -31,11 +33,14 @@ export default {
 		this.checkAuth();
 	},
 	methods: {
-		redirectme() {
+		async redirectme() {
+			await axios.post("/logout");
 			this.auth = false;
+
 			this.$store.commit("disconnecte");
 			this.$router.push("/login");
 		},
+		async logout() {},
 		checkAuth() {
 			if (this.$store.state.authenticated) {
 				return (this.auth = true);
